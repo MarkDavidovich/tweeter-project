@@ -22,12 +22,12 @@ export const Renderer = () => {
     postText.classList.add("post-title");
     commentsContainer.classList.add("comments-container");
     commentInputContainer.classList.add("comment-input-container");
-    // commentTextInput.dataset.id = id;
-    commentTextInput.setAttribute("name", `input-${id}`);
+    commentTextInput.id = id;
     commentTextInput.classList.add("comment-input-field");
     commentBtn.classList.add("comment-btn");
     commentBtn.dataset.id = id;
     deletePostBtn.classList.add("delete-tweet-btn");
+    deletePostBtn.dataset.id = id;
 
     commentTextInput.setAttribute("placeholder", "Got something to say?");
 
@@ -38,7 +38,7 @@ export const Renderer = () => {
     post.appendChild(postText);
     post.appendChild(commentsContainer);
     for (const comment of comments) {
-      commentsContainer.appendChild(_createCommentElement(comment.id, comment.text));
+      commentsContainer.appendChild(_createCommentElement(comment.id, comment.text, id));
     }
     post.appendChild(commentInputContainer);
     commentInputContainer.appendChild(commentTextInput);
@@ -48,7 +48,7 @@ export const Renderer = () => {
     return post;
   };
 
-  const _createCommentElement = (id, text) => {
+  const _createCommentElement = (id, text, postId) => {
     const comment = document.createElement("li");
     const deleteCommentBtn = document.createElement("button");
     const commentText = document.createElement("p");
@@ -56,7 +56,8 @@ export const Renderer = () => {
     comment.dataset.id = id;
     comment.classList.add("comment");
     commentText.classList.add("comment-text");
-    deleteCommentBtn.dataset.id = id;
+    deleteCommentBtn.dataset.idc = id;
+    deleteCommentBtn.dataset.idp = postId;
     deleteCommentBtn.classList.add("delete-comment-btn");
 
     commentText.textContent = text;

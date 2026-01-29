@@ -8,38 +8,42 @@ const loadPosts = () => {
   renderer.renderPosts(tweeter.getPosts());
 };
 
-const addBtnEventListeners = (buttons, func) => {
-  for (const button of buttons) {
-    button.addEventListener("click", func);
-  }
-};
-
 loadPosts();
 
-const twitBtn = document.querySelector("#tweet-btn");
+const tweetBtn = document.querySelector("#tweet-btn");
 const deletePostBtns = document.querySelectorAll(".delete-tweet-btn");
 const deleteCommentBtns = document.querySelectorAll(".delete-comment-btn");
 const commentBtns = document.querySelectorAll(".comment-btn");
 
-twitBtn.addEventListener("click", () => {
+tweetBtn.addEventListener("click", () => {
   const inputElement = document.querySelector("#tweet-input-field");
-  console.log("this shid works?");
   tweeter.addPost(inputElement.value);
   loadPosts();
 });
 
-addBtnEventListeners(deletePostBtns, () => {});
-addBtnEventListeners(deleteCommentBtns, () => {});
-addBtnEventListeners(commentBtns, () => {});
+for (const button of deletePostBtns) {
+  button.addEventListener("click", () => {
+    const id = button.dataset.id;
+    tweeter.removePost(id);
+    loadPosts();
+  });
+}
 
-// for (const button of deletePostBtns) {
-//   button.addEventListener("click", () => {});
-// }
+for (const button of deleteCommentBtns) {
+  button.addEventListener("click", () => {
+    const commentId = button.dataset.idc;
+    const postId = button.dataset.idp;
+    tweeter.removeComment(postId, commentId);
+    loadPosts();
+  });
+}
 
-// for (const button of deleteCommentBtns) {
-//   button.addEventListener("click", () => {});
-// }
-
-// for (const button of commentBtns) {
-//   button.addEventListener("click", () => {});
-// }
+for (const button of commentBtns) {
+  button.addEventListener("click", () => {
+    const id = button.dataset.id;
+    const inputElement = document.querySelector(`#${id}`);
+    tweeter.addComment(id, inputElement.value);
+    inputElement.textContent = "";
+    loadPosts();
+  });
+}
