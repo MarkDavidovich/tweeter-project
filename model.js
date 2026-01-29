@@ -22,16 +22,20 @@ export const Tweeter = () => {
   let _postIdCounter;
   let _commentIdCounter;
 
-  getPosts = () => {
+  const getPosts = () => {
     return [..._posts];
   };
 
-  addPost = (text) => {
+  const addPost = (text) => {
     //!validation of text?
-    _posts.push(text);
+
+    const lastIdx = _findLastIndex(_posts);
+    const id = _generateId(true, lastIdx);
+
+    _posts.push({ id, text });
   };
 
-  removePost = (postId) => {
+  const removePost = (postId) => {
     const postIdx = _posts.findIndex((post) => post.id === postId);
 
     if (postIdx !== -1) {
@@ -39,15 +43,20 @@ export const Tweeter = () => {
     }
   };
 
-  addComment = (postId, text) => {
+  const addComment = (postId, text) => {
     const targetPost = _findPost(postId);
+    //!validation of text?
+    //!check if comments exist?
 
     if (targetPost) {
-      targetPost.comments.push(text);
+      const lastIdx = _findLastIndex(_posts.comments);
+      const id = _generateId(true, lastIdx);
+
+      targetPost.comments.push({ id, text });
     }
   };
 
-  removeComment = (postId, commentId) => {
+  const removeComment = (postId, commentId) => {
     const targetPost = _findPost(postId);
 
     if (targetPost) {
@@ -59,7 +68,52 @@ export const Tweeter = () => {
     }
   };
 
-  _findPost = (postId) => {
+  const _generateId = (isPost, currLastIdx) => {
+    const char = isPost ? "p" : "c";
+    const idx = currLastIdx++;
+    return `${char + idx}`;
+  };
+
+  const _findLastIndex = (array) => {
+    //check posts for the last element, then access the last comment or post, parseInt and return it
+    if (array.length > 0) {
+      const id = array[array.length - 1].id;
+      return id.slice(1);
+    }
+
+    return 1;
+  };
+
+  const _findPost = (postId) => {
     return _posts.find((post) => post.id === postId);
   };
+
+  return {
+    getPosts,
+    addPost,
+    removePost,
+    addComment,
+    removeComment,
+  };
 };
+
+const tweeter = Tweeter();
+
+// Test adding a post
+tweeter.addPost("This is my own post!");
+console.log(tweeter.getPosts());
+// Should add: {text: "This is my own post!", id: "p3", comments: []}
+
+// Test removing a post
+tweeter.removePost("p1");
+console.log(tweeter.getPosts());
+// Should only have two posts left
+
+// Test adding comments
+tweeter.addComment("p3", "Damn straight it is!");
+tweeter.addComment("p2", "Second the best!");
+console.log(tweeter.getPosts());
+
+// Test removing comments
+tweeter.removeComment("p2", "c6");
+console.log(tweeter.getPosts());
