@@ -59,7 +59,6 @@ export const Tweeter = () => {
 
   const removeComment = (postId, commentId) => {
     const targetPost = _findPost(postId);
-    console.log(targetPost);
     if (targetPost) {
       const commentIdx = targetPost.comments.findIndex((comment) => comment.id === commentId);
 
