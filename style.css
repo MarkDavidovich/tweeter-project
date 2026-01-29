@@ -98,7 +98,7 @@ button {
   padding-left: 0.3rem;
 }
 
-.new-comment-container {
+.comment-input-container {
   padding-left: 0.7rem;
   display: flex;
   gap: 0.5rem;
