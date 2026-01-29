@@ -20,8 +20,8 @@ export const Tweeter = () => {
     },
   ];
 
-  let _postIdCounter = _posts.length;
-  let _commentIdCounter = _posts.comments.length;
+  //   let _postIdCounter = _posts.length;
+  //   let _commentIdCounter = _posts.comments.length;
 
   const getPosts = () => {
     return [..._posts];

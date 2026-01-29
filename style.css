@@ -68,13 +68,16 @@ button {
 }
 
 .posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post {
   border: 1px solid lightgray;
   border-radius: 0.5rem;
   padding: 1rem 2rem;
   box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 0.2);
-}
-
-.post {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -87,7 +90,7 @@ button {
   gap: 0.1rem;
 }
 
-#delete-comment-btn {
+.delete-comment-btn {
   border: none;
   background-color: rgb(242, 245, 248);
   color: red;
@@ -104,18 +107,18 @@ button {
   gap: 0.5rem;
 }
 
-#comment-input-field {
+.comment-input-field {
   padding: 0.1rem 0.3rem;
   width: 30%;
 }
 
-#comment-btn {
+.comment-btn {
   background-color: rgb(100, 116, 139);
   border: none;
   padding: 0.3rem 0.5rem;
 }
 
-#delete-tweet-btn {
+.delete-tweet-btn {
   background-color: rgb(210, 43, 43);
   color: white;
   padding: 0.3rem;

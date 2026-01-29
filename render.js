@@ -1,10 +1,10 @@
 export const Renderer = () => {
   const renderPosts = (posts) => {
-    const posts = document.querySelector(".posts-container");
-    posts.innerHTML = "";
+    const postsContainer = document.querySelector(".posts-container");
+    postsContainer.innerHTML = "";
 
     for (const post of posts) {
-      posts.appendChild(_createPostElement(post.text, post.id, post.comments));
+      postsContainer.appendChild(_createPostElement(post.text, post.id, post.comments));
     }
   };
 
@@ -22,17 +22,27 @@ export const Renderer = () => {
     postText.classList.add("post-title");
     commentsContainer.classList.add("comments-container");
     commentInputContainer.classList.add("comment-input-container");
-    commentTextInput.id = "comment-input-field";
-    commentBtn.id = "comment-btn";
-    deletePostBtn.id = "delete-tweet-btn";
+    commentTextInput.classList.add("comment-input-field");
+    commentBtn.classList.add("comment-btn");
+    deletePostBtn.classList.add("delete-tweet-btn");
 
     commentTextInput.setAttribute("placeholder", "Got something to say?");
 
     postText.textContent = text;
+    commentBtn.textContent = "Comment";
+    deletePostBtn.textContent = "Delete Post";
 
+    post.appendChild(postText);
+    post.appendChild(commentsContainer);
     for (const comment of comments) {
       commentsContainer.appendChild(_createCommentElement(comment.id, comment.text));
     }
+    post.appendChild(commentInputContainer);
+    commentInputContainer.appendChild(commentTextInput);
+    commentInputContainer.appendChild(commentBtn);
+    post.appendChild(deletePostBtn);
+
+    return post;
   };
 
   const _createCommentElement = (id, text) => {
@@ -42,14 +52,17 @@ export const Renderer = () => {
 
     comment.dataset.id = id;
     comment.classList.add("comment");
-    deleteCommentBtn.classList.add("dlete-comment-btn");
+    commentText.classList.add("comment-text");
+    deleteCommentBtn.classList.add("delete-comment-btn");
 
     commentText.textContent = text;
+    deleteCommentBtn.textContent = "✖";
 
     comment.appendChild(deleteCommentBtn);
     comment.appendChild(commentText);
 
     return comment;
   };
-  return renderPosts;
+
+  return { renderPosts };
 };
