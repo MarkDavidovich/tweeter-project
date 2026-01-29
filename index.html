@@ -7,6 +7,41 @@
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="main.js" defer></script>
     <script type="module" src="model.js" defer></script>
+    <script type="module" src="render.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <div class="container">
+        <h2 class="title">Tweeter</h2>
+      </div>
+    </header>
+    <main>
+      <section class="container">
+        <section class="new-tweet-container">
+          <input type="text" id="tweet-input-field" placeholder="What's on your mind?" />
+          <button id="tweet-btn">Twit</button>
+        </section>
+        <section class="posts-container">
+          <div class="post">
+            <h3 class="post-title">Post Title</h3>
+            <ul class="comments-container">
+              <li class="comment">
+                <button id="delete-comment-btn">✖</button>
+                <p class="comment-text">Comment text</p>
+              </li>
+              <li class="comment">
+                <button id="delete-comment-btn">✖</button>
+                <p class="comment-text">Comment text</p>
+              </li>
+            </ul>
+            <div class="new-comment-container">
+              <input type="text" id="comment-input-field" placeholder="Got something to say?" />
+              <button id="comment-btn">Comment</button>
+            </div>
+            <button id="delete-tweet-btn">Delete Post</button>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
 </html>
