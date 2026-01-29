@@ -32,7 +32,7 @@ export const Tweeter = () => {
     const lastIdx = _findLastIndex(_posts);
     const id = _generateId(true, lastIdx);
 
-    _posts.push({ id, text });
+    _posts.push({ text, id, comments: [] });
   };
 
   const removePost = (postId) => {
@@ -49,8 +49,8 @@ export const Tweeter = () => {
     //!check if comments exist?
 
     if (targetPost) {
-      const lastIdx = _findLastIndex(_posts.comments);
-      const id = _generateId(true, lastIdx);
+      const lastIdx = _findLastIndex(targetPost.comments);
+      const id = _generateId(false, lastIdx);
 
       targetPost.comments.push({ id, text });
     }
@@ -58,9 +58,9 @@ export const Tweeter = () => {
 
   const removeComment = (postId, commentId) => {
     const targetPost = _findPost(postId);
-
+    console.log(targetPost);
     if (targetPost) {
-      const commentIdx = targetPost.findIndex((comment) => comment.id === commentId);
+      const commentIdx = targetPost.comments.findIndex((comment) => comment.id === commentId);
 
       if (commentId !== -1) {
         targetPost.comments.splice(commentIdx, 1);
@@ -70,7 +70,7 @@ export const Tweeter = () => {
 
   const _generateId = (isPost, currLastIdx) => {
     const char = isPost ? "p" : "c";
-    const idx = currLastIdx++;
+    const idx = +currLastIdx + 1;
     return `${char + idx}`;
   };
 
