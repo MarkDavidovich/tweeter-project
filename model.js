@@ -28,8 +28,7 @@ export const Tweeter = () => {
   };
 
   const addPost = (text) => {
-    //!validation of text?
-
+    if (!text) return;
     const lastIdx = _findLastIndex(_posts);
     const id = _generateId(true, lastIdx);
 
@@ -45,9 +44,8 @@ export const Tweeter = () => {
   };
 
   const addComment = (postId, text) => {
+    if (!text) return;
     const targetPost = _findPost(postId);
-    //!validation of text?
-    //!check if comments exist?
 
     if (targetPost) {
       const lastIdx = _findLastIndex(targetPost.comments);

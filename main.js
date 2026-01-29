@@ -11,12 +11,12 @@ const loadPosts = () => {
 loadPosts();
 
 const postsContainer = document.querySelector(".posts-container");
-
 const tweetBtn = document.querySelector("#tweet-btn");
 
 tweetBtn.addEventListener("click", () => {
   const inputElement = document.querySelector("#tweet-input-field");
   tweeter.addPost(inputElement.value);
+  inputElement.value = "";
   loadPosts();
 });
 
@@ -32,7 +32,7 @@ postsContainer.addEventListener("click", (ev) => {
     const id = ev.target.dataset.id;
     const inputElement = document.querySelector(`#${id}`);
     tweeter.addComment(id, inputElement.value);
-    inputElement.textContent = "";
+    inputElement.value = "";
     loadPosts();
   }
 
