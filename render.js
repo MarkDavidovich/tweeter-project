@@ -22,8 +22,11 @@ export const Renderer = () => {
     postText.classList.add("post-title");
     commentsContainer.classList.add("comments-container");
     commentInputContainer.classList.add("comment-input-container");
+    // commentTextInput.dataset.id = id;
+    commentTextInput.setAttribute("name", `input-${id}`);
     commentTextInput.classList.add("comment-input-field");
     commentBtn.classList.add("comment-btn");
+    commentBtn.dataset.id = id;
     deletePostBtn.classList.add("delete-tweet-btn");
 
     commentTextInput.setAttribute("placeholder", "Got something to say?");
@@ -53,6 +56,7 @@ export const Renderer = () => {
     comment.dataset.id = id;
     comment.classList.add("comment");
     commentText.classList.add("comment-text");
+    deleteCommentBtn.dataset.id = id;
     deleteCommentBtn.classList.add("delete-comment-btn");
 
     commentText.textContent = text;
